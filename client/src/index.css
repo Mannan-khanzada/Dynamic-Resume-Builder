@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Fraunces:opsz,wght@9..144,400..700&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+    /* --- Fonts ---
+       Outfit  : all UI text, forms, buttons, body copy (clean, geometric, highly legible)
+       Fraunces: marketing headlines only (Hero, section titles, Footer brand name) — a
+                 soft-serif display face that reads like a well-set document/letterhead,
+                 which fits a resume product better than another generic grotesk headline. */
+    --font-sans: "Outfit", sans-serif;
+    --font-display: "Fraunces", serif;
+
+    /* ===================================================================
+       THEME #11 — FOREST (Teal #0d9488 -> Deep Emerald #065f46)
+       Gradient start = brand-indigo-700, Gradient end = brand-green-600.
+       Every bg-/text-/border-/ring-/from-/to-/fill-/stroke- utility that
+       uses these brand-* classes anywhere in the app updates automatically
+       from THIS block alone — that is the only thing that should ever be
+       edited to change the site's theme.
+       =================================================================== */
+
+    /* --- brand-green -> DEEP EMERALD (gradient end) --- */
+    --color-brand-green-50: var(--color-emerald-50);
+    --color-brand-green-100: var(--color-emerald-100);
+    --color-brand-green-200: var(--color-emerald-200);
+    --color-brand-green-300: var(--color-emerald-300);
+    --color-brand-green-400: var(--color-emerald-400);
+    --color-brand-green-500: var(--color-emerald-500);
+    --color-brand-green-600: #065f46;   /* emerald-800, exact gradient-end hex */
+    --color-brand-green-700: var(--color-emerald-900);
+    --color-brand-green-800: var(--color-emerald-950);
+
+    /* --- brand-blue -> TEAL (focus rings, inputs, skill tags, template picker) --- */
+    --color-brand-blue-50: var(--color-teal-50);
+    --color-brand-blue-100: var(--color-teal-100);
+    --color-brand-blue-200: var(--color-teal-200);
+    --color-brand-blue-300: var(--color-teal-300);
+    --color-brand-blue-400: var(--color-teal-400);
+    --color-brand-blue-500: var(--color-teal-500);
+    --color-brand-blue-600: var(--color-teal-600);
+    --color-brand-blue-700: var(--color-teal-700);
+    --color-brand-blue-800: var(--color-teal-800);
+
+    /* --- brand-indigo -> TEAL (gradient start) --- */
+    --color-brand-indigo-50: var(--color-teal-50);
+    --color-brand-indigo-200: var(--color-teal-200);
+    --color-brand-indigo-300: var(--color-teal-300);
+    --color-brand-indigo-500: var(--color-teal-500);
+    --color-brand-indigo-600: var(--color-teal-600);
+    --color-brand-indigo-700: #0d9488;  /* teal-600, exact gradient-start hex */
+    --color-brand-indigo-800: var(--color-teal-800);
+
+    /* --- brand-purple (AI "Enhance" buttons, color-picker trigger) -> EMERALD --- */
+    --color-brand-purple-50: var(--color-emerald-50);
+    --color-brand-purple-100: var(--color-emerald-100);
+    --color-brand-purple-200: var(--color-emerald-200);
+    --color-brand-purple-300: var(--color-emerald-300);
+    --color-brand-purple-400: var(--color-emerald-400);
+    --color-brand-purple-600: var(--color-emerald-600);
+    --color-brand-purple-700: var(--color-emerald-700);
+
+    /* --- brand-violet (Feature.jsx hover) -> EMERALD --- */
+    --color-brand-violet-100: var(--color-emerald-100);
+    --color-brand-violet-300: var(--color-emerald-300);
+    --color-brand-violet-600: var(--color-emerald-600);
+
+    /* --- brand-orange (Feature.jsx 3rd icon) -> unchanged, not part of the theme --- */
+    --color-brand-orange-100: var(--color-orange-100);
+    --color-brand-orange-300: var(--color-orange-300);
+    --color-brand-orange-600: var(--color-orange-600);
+
+    /* --- Raw gradient token: Teal -> Deep Emerald --- */
+    --gradient-brand: linear-gradient(to right, #0d9488, #065f46);
+}
+
+* {
+    font-family: var(--font-sans);
+}
+
+@layer base {
+    button {
+        cursor: pointer;
+    }
+
+    input:not([ type="checkbox" ]) {
+        @apply outline-none focus:ring border border-gray-300
+        focus:ring-brand-blue-500 focus:border-brand-blue-500 rounded-lg;
+    }
+
+    textarea {
+       @apply outline-none focus:ring border border-gray-300
+        focus:ring-brand-blue-500 focus:border-brand-blue-500 rounded-lg resize-none; 
+    }
+}
+
+
+/* ===========================================================================
+   FOREST GRADIENT BUTTONS — Teal #0d9488 -> Deep Emerald #065f46
+   Some CTA buttons across the app use a FLAT single-color class
+   (bg-brand-green-400/500/600/700) instead of a real two-stop gradient
+   utility. The @theme block above turns that flat color into the right
+   *solid* teal/emerald shade, but it stays a single color, not a gradient.
+   This block is the ONLY thing that forces those specific buttons to
+   render as the two-tone Forest gradient instead of one flat color.
+   =========================================================================== */
+
+.bg-brand-green-400,
+.bg-brand-green-500,
+.bg-brand-green-600,
+.bg-brand-green-700 {
+    background-image: linear-gradient(to right, #0d9488, #065f46);
+}
+
+.hover\:bg-brand-green-500:hover,
+.hover\:bg-brand-green-600:hover,
+.hover\:bg-brand-green-700:hover {
+    background-image: linear-gradient(to right, #0f766e, #064e3b);
+}
+
+/* Home page top banner strip — hardcoded arbitrary hex, not a brand-* token */
+.from-\[\#ABFF7E\] { --tw-gradient-from: #99f6e4; }
+.to-\[\#FDFEFF\]   { --tw-gradient-to:   #ecfdf5; }
